@@ -4,6 +4,8 @@
  */
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -75,7 +77,28 @@ public class PA8Main extends Application {
         // applies the command to the Ecosystem, and then tells the
         // wait thread to pause for the delay again.
         PauseTransition wait = new PauseTransition(Duration.seconds(delay));
-        wait.setOnFinished((e) -> {
+        wait.setOnFinished(new CommandHandler(countref, gc, command, wait));
+
+        // Now that the PauseTransition thread is setup, get it going.
+        wait.play();
+    }
+
+    class CommandHandler implements EventHandler<ActionEvent> {
+        private Counter countref;
+        private GraphicsContext gc;
+        private TextArea command;
+        private PauseTransition wait;
+
+        CommandHandler(Counter countref, GraphicsContext gc, TextArea command,
+                PauseTransition wait) {
+            this.countref = countref;
+            this.gc = gc;
+            this.command = command;
+            this.wait = wait;
+        }
+
+        @Override
+        public void handle(ActionEvent e) {
 
             //==== Code that should be executed after each delay goes in here.
             // read in the next command
@@ -98,11 +121,7 @@ public class PA8Main extends Application {
             } else {
                 wait.stop();
             }
-
-        });
-
-        // Now that the PauseTransition thread is setup, get it going.
-        wait.play();
+        }
     }
 
     /**
