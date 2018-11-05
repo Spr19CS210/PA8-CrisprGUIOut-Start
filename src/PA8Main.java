@@ -83,6 +83,9 @@ public class PA8Main extends Application {
         wait.play();
     }
 
+    /* TODO: rewrite this class to read in commands from an input file and
+     * draw the ecosystem to the canvas after the command has been processed.
+     */
     class CommandHandler implements EventHandler<ActionEvent> {
         private Counter countref;
         private GraphicsContext gc;
