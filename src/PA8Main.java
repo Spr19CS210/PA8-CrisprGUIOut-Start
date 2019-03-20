@@ -150,7 +150,7 @@ public class PA8Main extends Application {
 
         // Canvas(pixels across, pixels down)
         // Note this is opposite order of parameters of the Ecosystem in PA6.
-        Canvas canvas = new Canvas(SIZE_ACROSS, SIZE_DOWN);
+        Canvas canvas = new Canvas(canvas_width, canvas_height);
 
         // Command TextArea will hold the commands from the file
         command.setPrefHeight(TEXT_SIZE);
